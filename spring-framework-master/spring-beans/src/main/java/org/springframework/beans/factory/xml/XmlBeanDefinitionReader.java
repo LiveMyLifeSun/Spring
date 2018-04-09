@@ -120,7 +120,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	private NamespaceHandlerResolver namespaceHandlerResolver;
 
 	private DocumentLoader documentLoader = new DefaultDocumentLoader();
-
+	/**
+	 * 这里封装了一些spring.schemas
+	 */
 	@Nullable
 	private EntityResolver entityResolver;
 
@@ -341,6 +343,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
+				//去解析资源
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 			} finally {
 				inputStream.close();
@@ -396,6 +399,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
 			throws BeanDefinitionStoreException {
 		try {
+			//去解析资源
 			Document doc = doLoadDocument(inputSource, resource);
 			return registerBeanDefinitions(doc, resource);
 		} catch (BeanDefinitionStoreException ex) {
@@ -429,8 +433,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see DocumentLoader#loadDocument
 	 */
 	protected Document doLoadDocument(InputSource inputSource, Resource resource) throws Exception {
-		return this.documentLoader.loadDocument(inputSource, getEntityResolver(), this.errorHandler,
+		//获取到约束Spring.schemas
+		EntityResolver entityResolver = getEntityResolver();
+
+		return this.documentLoader.loadDocument(inputSource, entityResolver, this.errorHandler,
 				getValidationModeForResource(resource), isNamespaceAware());
+
 	}
 
 
@@ -474,6 +482,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 		InputStream inputStream;
 		try {
+			//获取到这个流
 			inputStream = resource.getInputStream();
 		} catch (IOException ex) {
 			throw new BeanDefinitionStoreException(
