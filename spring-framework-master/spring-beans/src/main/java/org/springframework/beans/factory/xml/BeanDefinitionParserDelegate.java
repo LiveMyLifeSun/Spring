@@ -411,7 +411,9 @@ public class BeanDefinitionParserDelegate {
 	 */
 	@Nullable
 	public BeanDefinitionHolder parseBeanDefinitionElement(Element ele, @Nullable BeanDefinition containingBean) {
+		//获取到ID
 		String id = ele.getAttribute(ID_ATTRIBUTE);
+		//获取name
 		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
 
 		List<String> aliases = new ArrayList<>();
@@ -430,6 +432,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		if (containingBean == null) {
+			//将Beanname添加到Set中
 			checkNameUniqueness(beanName, aliases, ele);
 		}
 
@@ -498,20 +501,23 @@ public class BeanDefinitionParserDelegate {
 			Element ele, String beanName, @Nullable BeanDefinition containingBean) {
 
 		this.parseState.push(new BeanEntry(beanName));
-
+		//解析Class属性
 		String className = null;
 		if (ele.hasAttribute(CLASS_ATTRIBUTE)) {
 			className = ele.getAttribute(CLASS_ATTRIBUTE).trim();
 		}
+		//解析parent
 		String parent = null;
 		if (ele.hasAttribute(PARENT_ATTRIBUTE)) {
 			parent = ele.getAttribute(PARENT_ATTRIBUTE);
 		}
 
 		try {
+			//创建用于承载属性的AbstractBeanDefinition类型的GenericBeanDefinition
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
-
+			//这里去解析各种文件
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+			//
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 			//解析元数据
 			parseMetaElements(ele, bd);
