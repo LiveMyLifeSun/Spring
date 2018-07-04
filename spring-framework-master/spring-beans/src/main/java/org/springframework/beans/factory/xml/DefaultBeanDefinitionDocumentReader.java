@@ -221,6 +221,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * from the given resource into the bean factory.
 	 */
 	protected void importBeanDefinitionResource(Element ele) {
+		/**
+		 *　 <import resource="customerContext.xml" />
+		 */
 		String location = ele.getAttribute(RESOURCE_ATTRIBUTE);
 		if (!StringUtils.hasText(location)) {
 			getReaderContext().error("Resource location must not be empty", ele);
@@ -259,7 +262,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 		else {
 			// No URL -> considering resource location as relative to the current file.
-			//如果是相对路径的话需要去获取绝对的路径
+			//如果是相对路径的话需要去获取文件的绝对的路径
 			try {
 				int importCount;
 				Resource relativeResource = getReaderContext().getResource().createRelative(location);
@@ -293,7 +296,14 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * Process the given alias element, registering the alias with the registry.
 	 */
 	protected void processAliasRegistration(Element ele) {
+		/**
+		 *用来给bean起别名
+		 * <alias name="componentA" alias="myApp" />
+		 * <alias name="componentA" alias="myApp" />
+		 */
+		//获取name属性
 		String name = ele.getAttribute(NAME_ATTRIBUTE);
+		//获取alias属性
 		String alias = ele.getAttribute(ALIAS_ATTRIBUTE);
 		boolean valid = true;
 		if (!StringUtils.hasText(name)) {

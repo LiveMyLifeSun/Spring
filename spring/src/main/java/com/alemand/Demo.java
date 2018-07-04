@@ -1,10 +1,11 @@
 package com.alemand;
 
+import com.alemand.entity.TestAware;
 import com.alemand.entity.User;
+import com.alemand.entity.init.TestInit;
 
-import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 
 /**
@@ -18,10 +19,12 @@ import org.springframework.core.io.ClassPathResource;
 public class Demo {
 
     public static void main(String[] args) {
-        //
-        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("test.xml");
-        User user = (User) classPathXmlApplicationContext.getBean("dateFormat");
-        System.out.println(user.getUserName());
+        //ClassPathXmlApplicationContext
+        ApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TestInit test = (TestInit) classPathXmlApplicationContext.getBean("test");
+        System.out.println(test.getName());
+
+
 
     }
 }

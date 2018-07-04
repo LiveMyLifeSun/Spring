@@ -12,7 +12,7 @@ public class User {
 
     private String userName;
 
-    private String passWard;
+    private String  email;;
 
     public User() {
     }
@@ -21,15 +21,15 @@ public class User {
         return userName;
     }
 
-    public String getPassWard() {
-        return passWard;
-    }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setPassWard(String passWard) {
-        this.passWard = passWard;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

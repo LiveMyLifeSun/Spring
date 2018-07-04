@@ -29,7 +29,7 @@ public class AlemandParser extends AbstractSingleBeanDefinitionParser {
      */
     @Override
     protected Class getBeanClass(Element element) {
-        return SimpleDateFormat.class;
+        return User.class;
     }
 
     /**
@@ -38,17 +38,15 @@ public class AlemandParser extends AbstractSingleBeanDefinitionParser {
      */
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        // this will never be null since the schema explicitly requires that a value be supplied
-        String pattern = element.getAttribute("pattern");
-        bean.addConstructorArgValue(pattern);
-
-        // this however is an optional property
-        String lenient = element.getAttribute("lenient");
-        if (StringUtils.hasText(lenient)) {
-            bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
+        String userName = element.getAttribute("userName");
+        String email = element.getAttribute("email");
+        //将提取的数据放入到BeanDefinitionBuilder中，待到完成所有bean的解析后统一注册到beanFactory中
+        if (StringUtils.hasText(userName)) {
+            bean.addPropertyValue("userName", userName);
         }
-
+        if (StringUtils.hasText(email)) {
+            bean.addPropertyValue("email", email);
+        }
     }
-
 
 }

@@ -74,6 +74,9 @@ public interface FactoryBean<T> {
 	 * @throws Exception in case of creation errors
 	 * @see FactoryBeanNotInitializedException
 	 */
+	/**
+	 *返回由FactoryBean创建的实例,
+	 */
 	@Nullable
 	T getObject() throws Exception;
 
@@ -95,6 +98,9 @@ public interface FactoryBean<T> {
 	 * @return the type of object that this FactoryBean creates,
 	 * or {@code null} if not known at the time of the call
 	 * @see ListableBeanFactory#getBeansOfType
+	 */
+	/**
+	 *返回有FactoryBean创建的bean的类型
 	 */
 	@Nullable
 	Class<?> getObjectType();
@@ -123,6 +129,9 @@ public interface FactoryBean<T> {
 	 * @return whether the exposed object is a singleton
 	 * @see #getObject()
 	 * @see SmartFactoryBean#isPrototype()
+	 */
+	/**
+	 *bean的作用域是单例还是多例单例为true
 	 */
 	default boolean isSingleton() {
 		return true;

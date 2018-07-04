@@ -139,7 +139,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 			throws BeansException {
 		//调用父类构造方法
 		super(parent);
-		//将资源,xml
+		//将资源,xml到ClassPathXmlApplicationContext里面
 		setConfigLocations(configLocations);
 		if (refresh) {
 			//刷新上下文

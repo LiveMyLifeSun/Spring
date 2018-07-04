@@ -20,7 +20,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-  <bean id="user" class="com.alemand.entity.User">
-  </bean>
+    <bean id="user" class="com.alemand.entity.User">
+        <property name="email" value="123"/>
+        <property name="userName" value="武国强"/>
+    </bean>
+    <bean id="test" class="com.alemand.entity.init.TestInit"></bean>
 
 </beans>
