@@ -8,6 +8,7 @@
   <component name="ComposerSettings">
     <pharPath>$USER_HOME$/composer.phar</pharPath>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
